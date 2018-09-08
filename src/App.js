@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person'
+import TextCount from './TextCount/TextCount';
+import Char from './CharComponent/CharComponent'
 
 class App extends Component {
 
@@ -10,7 +12,8 @@ class App extends Component {
       { id: 'f2342', name: "Sanu", age: 33 },
       { id: '41f34', name: "Ranjit", age: 34 },
     ],
-    showPersons: false
+    showPersons: false,
+    textlength:0
   }
 
   deletePersonHandler = (p) => {
@@ -34,7 +37,14 @@ class App extends Component {
   togglePersonsHandler = () => {
     this.setState({ showPersons: !this.state.showPersons })
   }
-
+  charsArray = [];
+  textCountInputHandler = (event)=>{
+    this.setState({ textlength: event.target.value.length });
+    let inputarray = Array.from(event.target.value)
+    this.charsArray = inputarray.map((char)=>{
+      return <Char char={char}/>
+    })
+  }
 
   render() {
     let persons = null;
@@ -53,10 +63,15 @@ class App extends Component {
         </div>
     };
 
+    
+
 
     return (
       <div className="App">
         <button onClick={this.togglePersonsHandler}>Toggle</button>
+        <input onChange={(event)=>this.textCountInputHandler(event)} />
+        <TextCount count = {this.state.textlength}/>
+        {this.charsArray}
         {persons}
       </div>
     );
