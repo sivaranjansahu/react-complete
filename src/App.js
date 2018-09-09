@@ -3,6 +3,7 @@ import './App.css';
 import Person from './Person/Person'
 import TextCount from './TextCount/TextCount';
 import Char from './CharComponent/CharComponent'
+import Radium from 'radium'
 
 class App extends Component {
 
@@ -47,6 +48,18 @@ class App extends Component {
   }
 
   render() {
+
+    //styles
+    const style={
+      backgroundColor:'red',
+      border:'none',
+      borderRadius:'3px',
+      padding:'5px 8px',
+      margin:'15px',
+      ':hover':{
+        backgroundColor:'yellow'
+      }
+    }
     let persons = null;
     if (this.state.showPersons === true) {
       persons =
@@ -68,7 +81,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <button onClick={this.togglePersonsHandler}>Toggle</button>
+        <button style={style} onClick={this.togglePersonsHandler}>Toggle</button>
         <input onChange={(event)=>this.textCountInputHandler(event)} />
         <TextCount count = {this.state.textlength}/>
         {this.charsArray}
@@ -78,4 +91,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
